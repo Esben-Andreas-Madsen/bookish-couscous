@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import Tile from './components/Tile';
+import ColorPicker from './components/ColorPicker';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [selectedColor, setSelectedColor] = useState(null);
+  const rows = 10;
+  const columns = 10;
+
+  const colorOptions = ['#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6', '#34495e', 'eraser'];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div style={{ textAlign: 'center' }}>
+      <ColorPicker
+        colors={colorOptions}
+        selectedColor={selectedColor}
+        onSelectColor={setSelectedColor}
+      />
 
-export default App
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${columns}, 100px)`,
+          gridTemplateRows: `repeat(${rows}, 100px)`,
+          width: `${columns * 100}px`,
+          height: `${rows * 100}px`,
+          margin: 'auto',
+          border: '4px solid #222',
+          boxSizing: 'content-box'
+        }}
+      >
+        {Array.from({ length: rows * columns }).map((_, i) => (
+          <Tile key={i} id={i + 1} color={selectedColor} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default App;
