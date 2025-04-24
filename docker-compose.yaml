@@ -8,7 +8,7 @@ services:
       - DATABASE_URL=file:./dev.db  # Correct path to the dev.db inside the prisma folder
     volumes:
       - ./couscous-backend:/app  # Mount the backend directory to the container
-      - ./couscous-backend/prisma/dev.db:/app/prisma/dev.db  # Mount the dev.db inside the prisma folder to the container
+      - ./couscous-backend/prisma/dev.db:/usr/src/app/prisma/dev.db
     networks:
       - app-network
 
