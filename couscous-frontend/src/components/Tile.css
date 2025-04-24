@@ -1,12 +1,12 @@
     .tile {
     width: 100px;
     height: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.068);
+    border: 1px solid #464646;
     box-sizing: border-box;
     transition: background-color 0.2s ease;
     cursor: pointer;
   }
 
   .tile:hover {
-    border-color: orange; 
+    border-color: white; 
   }

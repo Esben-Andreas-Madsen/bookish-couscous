@@ -27,7 +27,6 @@ const Tile = ({ id, selectedColor, savedColor }) => {
       onClick={handleClick}
       style={{
         backgroundColor: color || 'transparent',
-        border: '1px solid #ccc',
         width: '100px',
         height: '100px',
       }}
