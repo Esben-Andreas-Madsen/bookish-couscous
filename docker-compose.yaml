@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./couscous-backend  # Build the backend from the backend folder
+    ports:
+      - "4000:4000"  # Expose the backend on port 4000
+    environment:
+      - DATABASE_URL=file:./dev.db  # Correct path to the dev.db inside the prisma folder
+    volumes:
+      - ./couscous-backend:/app  # Mount the backend directory to the container
+      - ./couscous-backend/prisma/dev.db:/app/prisma/dev.db  # Mount the dev.db inside the prisma folder to the container
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./couscous-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./couscous-frontend:/app
+      - /app/node_modules # prevents overwriting node_modules
+    command: npm run dev -- --host
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+networks:
+  app-network:
+    driver: bridge
