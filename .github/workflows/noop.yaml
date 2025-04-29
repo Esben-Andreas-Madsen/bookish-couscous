@@ -1,0 +1,12 @@
+name: noop
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Always pass
+        run: echo "✅ passed (noop)"
